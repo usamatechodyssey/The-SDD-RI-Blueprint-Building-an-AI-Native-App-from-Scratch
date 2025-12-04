@@ -1,55 +1,38 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Hackathon 1 Project Constitution (SDD-RI)
 
-## Core Principles
+## Intent
+This project aims to build an AI-Generated Docusaurus Book and an Integrated RAG Chatbot. The core objective is to follow SDD-RI principles rigorously to maximize traceability, demonstrate reusable intelligence (Skills/Subagents), and secure all available bonus points.
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+## Required Sections
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### 1. Architecture Stack (Backend, Frontend, Data)
+- **Backend:** Python 3.12+ (Specifically **FastAPI** for API endpoints, **LangChain/ChatKit** for RAG logic and LLM orchestration).
+- **Frontend:** **Docusaurus** (for documentation generation, React/TypeScript-based) for the book deployment via GitHub Pages.
+- **Data:** Vector Database Must use **Qdrant Cloud Free Tier** for vector embeddings. Project configuration and metadata can use local JSON/SQLite.
+- **LLM Provider:** Must use **Gemini Flash** via the Claude Router setup (as verified) for cost efficiency.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### 2. Quality & Testing Standards
+- **Unit Tests:** Mandatory for all core logic, APIs, and utility functions (Pytest for Python).
+- **Integration Tests:** Essential for verifying RAG pipeline functionality (from Qdrant retrieval to final LLM response).
+- **Code Quality:** Enforced via linters (Black/Flake8 for Python, ESLint/Prettier for Docusaurus).
+- **Documentation:** All public APIs, complex functions, and architectural decisions must be documented.
+- **Commit History:** Commit messages must be clear, referencing the corresponding Task ID (TXXX) when applicable.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### 3. Security & Rate Limiting (Cost Management)
+- **Rate Limiting:** Mandatory API rate limiting on all public API endpoints (especially RAG chat) to prevent DoS and manage free tier usage.
+- **Input Validation:** Strict Pydantic validation for all FastAPI inputs to prevent injection attacks and ensure data integrity.
+- **Secrets Management:** Use environment variables (`.env`) for all API keys (OpenAI, Qdrant). **Secrets MUST NEVER be committed to GitHub or exposed on Docusaurus frontend.**
+- **Cost/Token Management:** All LLM calls must be designed to minimize token usage (e.g., maximizing context compression, using `gemini-flash` for thinking).
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### 4. Reusable Intelligence (RI) Mandates
+- **RI First:** All complex, repeatable logic (RAG pipeline setup, Docusaurus deployment script, chunking strategy) must be designed as a **Skill or Subagent** to demonstrate reusable intelligence.
+- **Traceability:** Every major design decision (e.g., RAG chunk size, FastAPI framework choice) must be documented via an **ADR** (Architectural Decision Record).
+- **Skill Documentation:** Every created Skill or Subagent must include **P+Q+P** (Persona + Questions + Principles) documentation.
 
-### [PRINCIPLE_6_NAME]
+## Non-Goals (Out of Scope for MVP Hackathon)
+- User Authentication for the RAG Chatbot (Chatbot is public).
+- Advanced UI features outside Docusaurus standard components.
+- Complex database migration strategies (using simple JSON/SQLite metadata).
 
-
-[PRINCIPLE__DESCRIPTION]
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
-
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
-
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+## Architectural Decision Records (ADR) - Intelligent Suggestion
+📋 Architectural decision detected: Initial Architecture Stack. Document reasoning and tradeoffs? Run `/sp.adr Initial-Architecture-Stack`

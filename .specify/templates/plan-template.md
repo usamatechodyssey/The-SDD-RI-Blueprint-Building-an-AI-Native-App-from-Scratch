@@ -1,3 +1,4 @@
+<!-- my-reserch-paper/.specify/templates/plan-template.md -->
 # Implementation Plan: [FEATURE]
 
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]

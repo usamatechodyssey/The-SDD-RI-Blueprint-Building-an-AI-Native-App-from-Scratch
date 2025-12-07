@@ -1,3 +1,5 @@
+<!-- my-reserch-paper/.specify/templates/adr-template.md -->
+
 # ADR-{{ID}}: {{TITLE}}
 
 > **Scope**: Document decision clusters, not individual technology choices. Group related decisions that work together (e.g., "Frontend Stack" not separate ADRs for framework, styling, deployment).

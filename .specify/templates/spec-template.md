@@ -1,3 +1,4 @@
+<!-- my-reserch-paper/.specify/templates/spec-template.md -->
 # Feature Specification: [FEATURE NAME]
 
 **Feature Branch**: `[###-feature-name]`  

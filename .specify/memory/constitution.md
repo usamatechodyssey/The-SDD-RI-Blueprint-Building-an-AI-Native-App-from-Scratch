@@ -1,3 +1,4 @@
+<!-- my-reserch-paper/.specify/memory/constitution.md -->
 # Hackathon 1 Project Constitution (SDD-RI)
 
 ## Intent

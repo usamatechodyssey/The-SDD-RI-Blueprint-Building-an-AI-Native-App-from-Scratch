@@ -1,3 +1,4 @@
+<!-- my-reserch-paper/CLAUDE.md -->
 # Claude Code Rules
 
 This file is generated during init for the selected agent.
@@ -208,3 +209,10 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- Python 3.12+, Node.js (for Docusaurus utilities) + FastAPI, LangChain/ChatKit, Docusaurus, Qdrant client libraries (001-book-creation)
+- Qdrant Cloud Free Tier (vector embeddings), local JSON/SQLite (project configuration and metadata) (001-book-creation)
+
+## Recent Changes
+- 001-book-creation: Added Python 3.12+, Node.js (for Docusaurus utilities) + FastAPI, LangChain/ChatKit, Docusaurus, Qdrant client libraries

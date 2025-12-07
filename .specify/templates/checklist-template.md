@@ -1,3 +1,4 @@
+<!-- my-reserch-paper/.specify/templates/checklist-template.md -->
 # [CHECKLIST TYPE] Checklist: [FEATURE NAME]
 
 **Purpose**: [Brief description of what this checklist covers]

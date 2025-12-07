@@ -1,0 +1,50 @@
+# ========================
+# Python (Backend)
+# ========================
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+# Pytest cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ========================
+# Node.js / Docusaurus (Frontend)
+# ========================
+node_modules/
+# Production build output
+build/
+# Docusaurus temporary cache (IMPORTANT)
+.docusaurus/
+
+# ========================
+# Testing (Playwright)
+# ========================
+test-results/
+playwright-report/
+blob-report/
+
+# ========================
+# Universal / System
+# ========================
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.log
+
+# ========================
+# IDE / Editors
+# ========================
+.vscode/
+.idea/
+
+# ========================
+# Security (Must Ignore)
+# ========================
+.env
+.env.*
+!.env.example

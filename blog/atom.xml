@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog</id>
+    <title>AI Native Dev Blog</title>
+    <updated>2025-12-07T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog"/>
+    <subtitle>AI Native Dev Blog</subtitle>
+    <icon>https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Phase A Complete - The Engine is Ready]]></title>
+        <id>https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog/phase-a-complete</id>
+        <link href="https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog/phase-a-complete"/>
+        <updated>2025-12-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Today marks a major milestone in our Hackathon journey. We have successfully completed Phase A: The Book Generation Engine.]]></summary>
+        <content type="html"><![CDATA[<p>Today marks a major milestone in our Hackathon journey. We have successfully completed <strong>Phase A: The Book Generation Engine</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-we-achieved">What we achieved:<a href="https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog/phase-a-complete#what-we-achieved" class="hash-link" aria-label="Direct link to What we achieved:" title="Direct link to What we achieved:" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>Backend Core:</strong> A FastAPI engine that understands Markdown.</li>
+<li class=""><strong>Frontend:</strong> A dynamic Docusaurus site that builds itself.</li>
+<li class=""><strong>Governance:</strong> Strictly following SDD-RI principles with Traceability.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-next-phase-b">What's Next? (Phase B)<a href="https://usamatechodyssey.github.io/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog/phase-a-complete#whats-next-phase-b" class="hash-link" aria-label="Direct link to What's Next? (Phase B)" title="Direct link to What's Next? (Phase B)" translate="no">​</a></h2>
+<p>Now that the static book is ready, we are moving to <strong>Phase B: RAG Chatbot</strong>.
+We will be integrating <strong>Qdrant</strong> and <strong>Gemini</strong> to let users "Talk to the Book".</p>
+<p>Stay tuned!</p>]]></content>
+        <author>
+            <name>Dev Team</name>
+            <uri>https://example.com</uri>
+        </author>
+        <category label="hackathon" term="hackathon"/>
+        <category label="sdd-ri" term="sdd-ri"/>
+        <category label="milestone" term="milestone"/>
+    </entry>
+</feed>

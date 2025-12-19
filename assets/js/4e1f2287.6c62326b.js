@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdocusaurus=globalThis.webpackChunkdocusaurus||[]).push([[4424],{277:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

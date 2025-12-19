@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdocusaurus=globalThis.webpackChunkdocusaurus||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Phase A Complete - The Engine is Ready","permalink":"/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog/phase-a-complete","unlisted":false,"date":"2025-12-07T00:00:00.000Z"}]}')}}]);

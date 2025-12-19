@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdocusaurus=globalThis.webpackChunkdocusaurus||[]).push([[903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog","blogTitle":"Blog","authorsListPath":"/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/blog/authors"}')}}]);

@@ -1,16 +1,13 @@
-#backend/src/api/main.py
 from fastapi import FastAPI
-from backend.src.api.middleware.rate_limiter import RateLimitMiddleware
-from backend.src.api.endpoints import book_generation, book_deployment
+from backend.src.api.endpoints import book_generation, book_deployment, admin_api # <-- Naya import
 
-app = FastAPI()
+app = FastAPI(title="AI-Native Book CMS")
 
-app.add_middleware(RateLimitMiddleware)
-
+# Routers
 app.include_router(book_generation.router)
 app.include_router(book_deployment.router)
-
+app.include_router(admin_api.router) # <-- Register karein
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to the AI-Generated Docusaurus Book API!"}
+def root():
+    return {"message": "Admin CMS is Live!"}

@@ -1,3 +1,4 @@
+# specs/001-book-creation/contracts/api-v1.yaml
 openapi: 3.1.0
 info:
   title: AI-Native Book Generator API

@@ -1,129 +1,118 @@
 import os
 import shutil
+import json # <--- Naya import indices generate karne ke liye
 from datetime import datetime
 from typing import List
-
 from backend.src.models.models import SourceContent, DocusaurusProject
 from backend.src.utils.logging import logger, BackendException
 
-# LOGIC FIX: Dynamic Path Resolution
+# Path Discovery
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", "..", ".."))
 DEFAULT_TEMPLATE_PATH = os.path.join(PROJECT_ROOT, "frontend", "docusaurus")
-
-# Use Env Var if set, otherwise use calculated default
 DOCUSAURUS_TEMPLATE_PATH = os.getenv("DOCUSAURUS_TEMPLATE_PATH", DEFAULT_TEMPLATE_PATH)
 
 def initialize_docusaurus_project(output_directory: str):
-    """
-    Smart Initialization:
-    - If project exists: Only clears the 'docs' folder (Incremental Update).
-    - If project missing: Copies the full template (Full Gen).
-    """
-    
-    # Normalize paths for Windows comparison
+    """Initializes or checks for existing Docusaurus project."""
     abs_output = os.path.abspath(output_directory)
-    abs_template = os.path.abspath(DOCUSAURUS_TEMPLATE_PATH)
-
-    # Check if the output directory looks like a valid Docusaurus project
     config_exists = os.path.exists(os.path.join(abs_output, "docusaurus.config.js"))
-    
+
     if os.path.exists(abs_output) and config_exists:
-        logger.info(f"Existing Docusaurus project detected at {output_directory}. Switch to INCREMENTAL UPDATE.")
-        
-        # Sirf 'docs' folder ko saaf karein, poore project ko nahi
-        docs_path = os.path.join(abs_output, "docs")
-        if os.path.exists(docs_path):
-            try:
-                # Remove all files in docs folder
-                for filename in os.listdir(docs_path):
-                    file_path = os.path.join(docs_path, filename)
-                    if os.path.isfile(file_path) or os.path.islink(file_path):
-                        os.unlink(file_path)
-                    elif os.path.isdir(file_path):
-                        shutil.rmtree(file_path)
-                logger.info("Cleaned existing 'docs' directory.")
-            except Exception as e:
-                logger.warning(f"Could not fully clean docs folder: {e}")
-        else:
-            os.makedirs(docs_path, exist_ok=True)
-            
-        return  # Yahan se wapas chale jao, Template Copy karne ki zaroorat nahi hai.
+        logger.info(f"Merge Mode: Project exists at {output_directory}")
+        os.makedirs(os.path.join(abs_output, "docs"), exist_ok=True)
+        return 
 
-    # --- FULL GENERATION (New Project) ---
     if not os.path.exists(DOCUSAURUS_TEMPLATE_PATH):
-        error_msg = f"Docusaurus template not found at: {DOCUSAURUS_TEMPLATE_PATH}"
-        logger.error(error_msg)
-        raise BackendException(error_msg, status_code=500)
+        raise BackendException(f"Template not found at: {DOCUSAURUS_TEMPLATE_PATH}", status_code=500)
 
-    if os.path.exists(output_directory):
-        logger.info(f"Removing existing directory for fresh install: {output_directory}")
-        try:
-            shutil.rmtree(output_directory)
-        except Exception as e:
-            # Agar delete fail ho (e.g. node_modules locked), to error mat throw karo, bas warn karo
-            logger.warning(f"Could not delete existing directory (likely locked): {e}. Attempting to overwrite.")
-
-    logger.info(
-        f"Copying Docusaurus template from {DOCUSAURUS_TEMPLATE_PATH} to {output_directory}"
-    )
-    # Ignore node_modules when copying template (just in case)
+    logger.info(f"Fresh Setup: Copying template to {output_directory}")
     shutil.copytree(
         DOCUSAURUS_TEMPLATE_PATH, 
         output_directory, 
         dirs_exist_ok=True, 
         ignore=shutil.ignore_patterns('node_modules', '.docusaurus', '.git')
     )
-    logger.info(f"Docusaurus project initialized at {output_directory}")
 
+# --- NEW: AUTO-INDEX GENERATOR SKILL 🤖 ---
+def generate_category_indices(docs_path: str):
+    """
+    Har folder ko scan karta hai aur missing _category_.json generate karta hai.
+    Taake 'Category Index Pages' automatically kaam karein.
+    """
+    for root, dirs, files in os.walk(docs_path):
+        # Skip the main 'docs' root itself
+        if root == docs_path:
+            continue
+            
+        category_json_path = os.path.join(root, "_category_.json")
+        
+        # Agar pehle se maujood hai toh touch nahi karenge
+        if not os.path.exists(category_json_path):
+            folder_name = os.path.basename(root)
+            
+            # Khubsurat label banayein (e.g. '01-Vision' -> 'Vision')
+            # Hum sirf hyphen '-' ke baad wala part le sakte hain agar numbers hain
+            label = folder_name.split('-')[-1] if '-' in folder_name else folder_name
+            
+            config_data = {
+                "label": label,
+                "link": {
+                    "type": "generated-index",
+                    "description": f"Explore documentation and research related to {label}."
+                }
+            }
+            
+            try:
+                with open(category_json_path, 'w', encoding='utf-8') as f:
+                    json.dump(config_data, f, indent=2)
+                logger.info(f"✨ Auto-generated Category Index for: {folder_name}")
+            except Exception as e:
+                logger.error(f"Failed to generate index for {folder_name}: {e}")
 
 def write_content_to_docusaurus_docs(project_path: str, contents: List[SourceContent]):
-    """Writes processed SourceContent into the Docusaurus docs directory."""
+    """Writes Markdown and copies Binary Assets (Images/PDFs) to docs."""
     docs_path = os.path.join(project_path, "docs")
     os.makedirs(docs_path, exist_ok=True)
 
     for content in contents:
-        safe_filename = os.path.basename(content.file_path)
-        doc_file_path = os.path.join(docs_path, safe_filename)
+        doc_file_path = os.path.join(docs_path, content.id)
+        os.makedirs(os.path.dirname(doc_file_path), exist_ok=True)
         
-        logger.info(f"Writing content for {safe_filename} to {doc_file_path}")
         try:
-            with open(doc_file_path, "w", encoding="utf-8") as f:
-                f.write(content.processed_content)
+            if content.content_type == "binary":
+                shutil.copy2(content.file_path, doc_file_path)
+                logger.info(f"🖼️ Asset Synced: {content.id}")
+            else:
+                with open(doc_file_path, "w", encoding="utf-8") as f:
+                    f.write(content.processed_content)
+                logger.info(f"📂 Doc Synced: {content.id}")
         except Exception as e:
-            logger.error(f"Failed to write file {doc_file_path}: {e}")
-            raise BackendException(f"File write error: {str(e)}", status_code=500)
+            logger.error(f"Failed to handle {doc_file_path}: {e}")
+            raise BackendException(f"Asset handling error: {str(e)}", status_code=500)
 
-
-def generate_docusaurus_project(
-    contents: List[SourceContent], output_directory: str
-) -> DocusaurusProject:
-    """Generates a complete Docusaurus project from processed source contents."""
+def generate_docusaurus_project(contents: List[SourceContent], output_directory: str) -> DocusaurusProject:
     try:
+        # 1. Folder Setup
         initialize_docusaurus_project(output_directory)
+        
+        # 2. Content Sync
         write_content_to_docusaurus_docs(output_directory, contents)
+        
+        # 3. JADOO: Generate Category Indices for all folders 🪄
+        docs_path = os.path.join(output_directory, "docs")
+        generate_category_indices(docs_path)
 
-        config_files = [
-            os.path.join(output_directory, "docusaurus.config.js"),
-            os.path.join(output_directory, "sidebar.js"),
-        ]
-        content_files = [
-            os.path.join(output_directory, "docs", os.path.basename(c.file_path)) for c in contents
-        ]
-
+        # 4. Meta Data
         project = DocusaurusProject(
             id=os.path.basename(output_directory),
             project_path=output_directory,
-            config_files=config_files,
-            content_files=content_files,
+            config_files=[os.path.join(output_directory, "docusaurus.config.js")],
+            content_files=[c.id for c in contents],
             creation_timestamp=datetime.now(),
-        )
-        logger.info(
-            f"Docusaurus project '{project.id}' generated successfully at {project.project_path}"
         )
         return project
     except BackendException as be:
         raise be
     except Exception as e:
-        logger.error(f"Error generating Docusaurus project: {e}")
-        raise BackendException(f"Failed to generate Docusaurus project: {str(e)}", status_code=500)
+        logger.error(f"Generation error: {e}")
+        raise BackendException(f"Failed to generate project: {str(e)}", status_code=500)

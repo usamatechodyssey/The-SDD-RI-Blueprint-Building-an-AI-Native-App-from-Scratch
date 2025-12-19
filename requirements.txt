@@ -1,0 +1,26 @@
+# --- FastAPI & Backend Core ---
+fastapi==0.124.0
+starlette==0.50.0
+uvicorn==0.38.0
+pydantic==2.12.5
+pydantic-settings==2.12.0
+python-dotenv==1.2.1
+
+# --- Utility & Data Models ---
+annotated-types==0.7.0
+typing-extensions==4.15.0
+orjson==3.11.5 # FastAPI dependency
+requests==2.32.5
+
+# --- Code Quality & Testing (Pytest) ---
+iniconfig==2.3.0
+pluggy==1.6.0
+pytest==9.0.1
+# NOTE: Baki Pytest dependencies (like coverage, waghaira) automatically install ho jayengi.
+
+# --- Security & Middlewares ---
+python-jose==3.5.0 # (Used for JWT if needed, kept for common security)
+passlib==1.7.4 # (Used for hashing if needed, kept for common security)
+
+python-multipart==0.0.9 # <-- Naya Add hua
+python-magic==0.4.27  # <-- Naya Add hua (Ya filetype agar magic na kare to)

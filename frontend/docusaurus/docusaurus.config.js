@@ -1,5 +1,4 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+
 
 const prismThemes = require('prism-react-renderer').themes;
 
@@ -10,14 +9,27 @@ const config = {
   tagline: 'Spec-Driven Reusable Intelligence',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'http://localhost:3000',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/',
+  
 
-  // GitHub pages deployment config.
-  organizationName: 'panaversity', // Your GitHub Org
-  projectName: 'ai-native-book', // Your Repo Name
+
+  // -------------------------------------------------------------------------
+  // DEPLOYMENT CONFIG (UPDATED FOR YOUR GITHUB)
+  // -------------------------------------------------------------------------
+  
+  // Aapka Domain (GitHub Pages url)
+  url: 'https://usamatechodyssey.github.io', 
+  
+  // Aapka Repo Name (Slash start aur end mein zaroori hai)
+  baseUrl: '/The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch/',
+
+  // GitHub User & Repo Info
+  organizationName: 'usamatechodyssey', // Aapka Username
+  projectName: 'The-SDD-RI-Blueprint-Building-an-AI-Native-App-from-Scratch', // Aapka Repo Name
+  
+  deploymentBranch: 'gh-pages', // Woh branch jo website display karegi
+  trailingSlash: false, // GitHub Pages ke liye best practice
+
+  // -------------------------------------------------------------------------
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -35,7 +47,6 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Edit URL remove kar diya hai taake "Edit this page" ka link na dikhe (Optional)
           editUrl: undefined, 
         },
         blog: {
@@ -57,7 +68,7 @@ const config = {
       
       // --- 2. Navbar Configuration ---
       navbar: {
-        title: 'AI Native Dev', // Website ke top-left mein ye dikhega
+        title: 'AI Native Dev', 
         
         items: [
           {
@@ -68,7 +79,7 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/panaversity',
+            href: 'https://github.com/usamatechodyssey',
             label: 'GitHub',
             position: 'right',
           },
@@ -82,34 +93,22 @@ const config = {
           {
             title: 'Learn',
             items: [
-              { label: 'Introduction', to: '/docs/introduction' },
-              { label: 'AI Assisted', to: '/docs/introduction' },
-              { label: 'AI Native', to: '/docs/introduction' },
+              { label: 'Introduction', to: '/docs/category/Introduction' }, // Fixed link to prevent 404
+              { label: 'AI Assisted', to: '/docs/category/Introduction' },
             ],
           },
           {
             title: 'Community',
             items: [
-              { label: 'Discord', href: 'https://discord.com' },
-              { label: 'Twitter', href: 'https://twitter.com' },
-              { label: 'GitHub', href: 'https://github.com' },
+              { label: 'GitHub', href: 'https://github.com/usamatechodyssey' },
             ],
           },
           {
             title: 'More',
             items: [
               { label: 'Blog', to: '/blog' },
-              { label: 'Panaversity', href: 'https://www.panaversity.org/' },
-              { label: 'Privacy Policy', to: '/' },
             ],
           },
-          {
-            title: 'Legal',
-            items: [
-              { label: 'Terms', to: '/' },
-              { label: 'License', to: '/' },
-            ]
-          }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} AI Native Software Development. Built with Spec-Kit.`,
       },

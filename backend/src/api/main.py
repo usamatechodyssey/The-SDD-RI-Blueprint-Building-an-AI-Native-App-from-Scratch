@@ -9,7 +9,7 @@ app = FastAPI(title="AI-Native Book CMS")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Hackathon ke liye "*" best hai (Allow all)
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

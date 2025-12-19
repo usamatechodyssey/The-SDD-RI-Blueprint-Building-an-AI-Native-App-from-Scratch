@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // --- CONFIGURATION ---
 // Jani, yahan apne Book Backend ka URL likhein jahan humne /chatbot-config banaya hai
-const BOOK_BACKEND_URL = 'https://your-book-backend.up.railway.app';
+const BOOK_BACKEND_URL = 'the-sdd-ri-blueprint-building-an-ai-native-app-f-production.up.railway.app';
 
 export default function CustomChat() {
   const [isOpen, setIsOpen] = useState(false);

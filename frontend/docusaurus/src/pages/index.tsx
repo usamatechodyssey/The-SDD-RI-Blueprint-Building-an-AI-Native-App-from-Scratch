@@ -6,7 +6,7 @@ import Layout from '@theme/Layout';
 import Hero from '../components/Homepage/Hero';
 import Features from '../components/Homepage/Features';
 import Curriculum from '../components/Homepage/Curriculum';
-import CustomChat from '../components/Chatbot/index'; // <--- Naya Import
+
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -21,8 +21,7 @@ export default function Home(): JSX.Element {
         <Features />
         <Curriculum />
 
-        {/* 🤖 Custom Chatbot UI yahan add karein */}
-        <CustomChat />
+     
       </main>
     </Layout>
   );

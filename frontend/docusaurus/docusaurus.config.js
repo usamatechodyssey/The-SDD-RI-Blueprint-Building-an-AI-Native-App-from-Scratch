@@ -93,8 +93,8 @@ const config = {
           {
             title: 'Learn',
             items: [
-              { label: 'Introduction', to: '/docs/category/Introduction' }, // Fixed link to prevent 404
-              { label: 'AI Assisted', to: '/docs/category/Introduction' },
+              { label: 'Introduction', to: '/docs/category/introduction' }, // Fixed link to prevent 404
+              { label: 'AI Assisted', to: '/docs/category/introduction' },
             ],
           },
           {
